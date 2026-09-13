@@ -5,27 +5,36 @@ let score = 0;
 let totalScore = 0;
 let timerInterval;
 
-let tiles = [1,2,3,4,5,6,7,8,""];
+let tiles = [1, 2, 3, 4, 5, 6, 7, 8, ""];
 
 
-/* START GAME */
+/* =========================
+   START GAME
+========================= */
+
 function startGame() {
+
+    clearInterval(timerInterval);
 
     level = 1;
     totalScore = 0;
+    score = 0;
 
     document.getElementById("startScreen").style.display = "none";
-    document.getElementById("finalScreen").style.display = "none";
     document.getElementById("gameScreen").style.display = "block";
     document.getElementById("winScreen").style.display = "none";
 
     document.getElementById("level").textContent = level;
+    document.getElementById("score").textContent = "0";
 
     shufflePuzzle();
 }
 
 
-/* TIMER */
+/* =========================
+   TIMER
+========================= */
+
 function startTimer() {
 
     clearInterval(timerInterval);
@@ -34,7 +43,7 @@ function startTimer() {
 
     document.getElementById("timer").textContent = "0";
 
-    timerInterval = setInterval(function() {
+    timerInterval = setInterval(function () {
 
         time++;
 
@@ -44,14 +53,17 @@ function startTimer() {
 }
 
 
-/* DRAW PUZZLE */
+/* =========================
+   DRAW PUZZLE
+========================= */
+
 function drawPuzzle() {
 
     const puzzle = document.getElementById("puzzle");
 
     puzzle.innerHTML = "";
 
-    tiles.forEach(function(tile, index) {
+    tiles.forEach(function (tile, index) {
 
         const box = document.createElement("div");
 
@@ -61,11 +73,12 @@ function drawPuzzle() {
 
         if (tile !== "") {
 
-            box.onclick = function() {
+            box.onclick = function () {
 
                 moveTile(index);
 
             };
+
         }
 
         puzzle.appendChild(box);
@@ -74,7 +87,10 @@ function drawPuzzle() {
 }
 
 
-/* MOVE TILE */
+/* =========================
+   MOVE TILE
+========================= */
+
 function moveTile(index) {
 
     const emptyIndex = tiles.indexOf("");
@@ -101,24 +117,43 @@ function moveTile(index) {
         drawPuzzle();
 
         checkWin();
+
     }
+
 }
 
 
-/* SHUFFLE */
+/* =========================
+   SHUFFLE PUZZLE
+========================= */
+
 function shufflePuzzle() {
 
-    tiles = [1,2,3,4,5,6,7,8,""];
+    tiles = [1, 2, 3, 4, 5, 6, 7, 8, ""];
 
     moves = 0;
 
     document.getElementById("moves").textContent = "0";
 
+
     /*
-       Higher level = more shuffle
+       Difficulty increases with level.
+
+       Level 1  → 100 shuffles
+       Level 2  → 110 shuffles
+       Level 10 → 190 shuffles
+       Level 50 → 590 shuffles
+       Level 100 → 1090 shuffles
+
+       Maximum is 1200 shuffles
+       so the game doesn't become unnecessarily slow.
     */
 
-    let shuffleCount = 100 + (level * 100);
+    let shuffleCount = 100 + (level - 1) * 10;
+
+    if (shuffleCount > 1200) {
+        shuffleCount = 1200;
+    }
 
 
     for (let i = 0; i < shuffleCount; i++) {
@@ -131,17 +166,21 @@ function shufflePuzzle() {
         const col = emptyIndex % 3;
 
 
-        if (row > 0)
+        if (row > 0) {
             possible.push(emptyIndex - 3);
+        }
 
-        if (row < 2)
+        if (row < 2) {
             possible.push(emptyIndex + 3);
+        }
 
-        if (col > 0)
+        if (col > 0) {
             possible.push(emptyIndex - 1);
+        }
 
-        if (col < 2)
+        if (col < 2) {
             possible.push(emptyIndex + 1);
+        }
 
 
         const randomIndex =
@@ -150,24 +189,30 @@ function shufflePuzzle() {
 
         [tiles[emptyIndex], tiles[randomIndex]] =
         [tiles[randomIndex], tiles[emptyIndex]];
+
     }
 
 
     startTimer();
 
     drawPuzzle();
+
 }
 
 
-/* CHECK WIN */
+/* =========================
+   CHECK WIN
+========================= */
+
 function checkWin() {
 
     const win =
-        tiles.slice(0,8).every(function(tile,index) {
+        tiles.slice(0, 8).every(function (tile, index) {
 
             return tile === index + 1;
 
-        }) && tiles[8] === "";
+        }) &&
+        tiles[8] === "";
 
 
     if (win) {
@@ -176,17 +221,25 @@ function checkWin() {
 
 
         /*
-          Score calculation
+           Score calculation.
+
+           Higher levels give more points.
+           Time and moves reduce the score.
         */
 
         score = Math.max(
             100,
-            1000 + (level * 500) - (time * 2) - moves
+            1000 +
+            (level * 500) -
+            (time * 2) -
+            moves
         );
 
 
         totalScore += score;
 
+
+        document.getElementById("score").textContent = score;
 
         document.getElementById("finalLevel").textContent = level;
 
@@ -200,32 +253,19 @@ function checkWin() {
         document.getElementById("gameScreen").style.display = "none";
 
         document.getElementById("winScreen").style.display = "block";
+
     }
+
 }
 
 
-/* NEXT LEVEL */
+/* =========================
+   NEXT LEVEL
+========================= */
+
 function nextLevel() {
 
     level++;
-
-
-    /*
-      Only 3 levels for now
-    */
-
-    if (level > 3) {
-
-        document.getElementById("winScreen").style.display = "none";
-
-        document.getElementById("totalScore").textContent =
-            totalScore;
-
-        document.getElementById("finalScreen").style.display = "block";
-
-        return;
-    }
-
 
     document.getElementById("level").textContent = level;
 
@@ -234,4 +274,5 @@ function nextLevel() {
     document.getElementById("gameScreen").style.display = "block";
 
     shufflePuzzle();
+
 }
