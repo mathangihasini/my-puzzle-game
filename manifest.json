@@ -1,0 +1,13 @@
+{
+  "background_color": "#ffffff",
+  "description": "A fun puzzle game with challenging levels.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "My Puzzle Game",
+  "orientation": "portrait",
+  "scope": "/my-puzzle-game/",
+  "short_name": "Puzzle Game",
+  "start_url": "/my-puzzle-game/",
+  "theme_color": "#667eea",
+  "id": "/my-puzzle-game/"
+}
