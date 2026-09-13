@@ -1,157 +1,684 @@
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     text-align: center;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+
     color: white;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(255,255,255,0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #667eea 0%,
+            #764ba2 50%,
+            #5b4bb7 100%
+        );
+
     padding: 20px;
+
+    overflow-x: hidden;
 }
 
-.card {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 30px 20px;
-    background: rgba(255,255,255,0.16);
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    backdrop-filter: blur(10px);
+
+/* =========================
+   SCREEN
+========================= */
+
+.screen {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    width: 100%;
+    max-width: 520px;
+
+    margin: 30px auto;
+
+    padding: 32px 22px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    border:
+        1px solid rgba(255,255,255,0.25);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.28);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    animation: cardAppear 0.5s ease;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
 
 h1 {
     font-size: 38px;
-    margin: 10px 0 15px;
+    margin: 12px 0 18px;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,0.25);
 }
 
 p {
     font-size: 18px;
+    line-height: 1.5;
 }
 
-.emoji {
-    font-size: 60px;
+.tagline {
+    font-size: 21px;
+    font-weight: bold;
 }
+
+
+/* =========================
+   EMOJI
+========================= */
+
+.emoji {
+    font-size: 70px;
+
+    filter:
+        drop-shadow(
+            0 8px 10px rgba(0,0,0,0.2)
+        );
+}
+
+.win-emoji {
+    animation: trophyBounce 1s infinite alternate;
+}
+
+@keyframes trophyBounce {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================
+   BUTTON
+========================= */
 
 button {
     border: none;
-    padding: 14px 28px;
+
+    padding: 14px 25px;
+
     border-radius: 30px;
+
     background: white;
+
     color: #5b4bb7;
-    font-size: 18px;
+
+    font-size: 17px;
+
     font-weight: bold;
+
     cursor: pointer;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    transition: 0.2s;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,0.25);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+
+    user-select: none;
 }
 
 button:hover {
-    transform: scale(1.06);
+    transform: translateY(-2px) scale(1.03);
+
+    box-shadow:
+        0 10px 22px rgba(0,0,0,0.3);
 }
 
-.stats {
+button:active {
+    transform: scale(0.96);
+}
+
+.main-button {
+    padding: 16px 30px;
+    font-size: 19px;
+}
+
+
+/* =========================
+   SOUND BUTTON
+========================= */
+
+.sound-button {
+    position: fixed;
+
+    top: 15px;
+    right: 15px;
+
+    z-index: 1000;
+
+    padding: 10px 16px;
+
+    font-size: 14px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.25);
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.feature-box {
+
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+
+}
+
+.feature-box div {
+
+    padding: 12px 8px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
     gap: 8px;
+
     margin: 20px 0;
 }
 
-.stats div {
-    background: rgba(255,255,255,0.2);
-    padding: 10px 4px;
-    border-radius: 12px;
-    font-size: 14px;
+.stat-box {
+
+    min-height: 92px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 3px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border-radius: 15px;
+
+    padding: 8px 4px;
+
+    border:
+        1px solid rgba(255,255,255,0.12);
 }
 
-.stats span {
-    font-size: 20px;
-    font-weight: bold;
+.stat-icon {
+    font-size: 21px;
 }
+
+.stat-box small {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.stat-box b {
+
+    font-size: 20px;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+/* =========================
+   BEST SCORE
+========================= */
+
+.best-score {
+
+    display: inline-block;
+
+    padding: 9px 17px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    font-size: 15px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   PUZZLE
+========================= */
 
 #puzzle {
-    width: min(90vw, 360px);
-    height: min(90vw, 360px);
+
+    width:
+        min(90vw, 370px);
+
+    height:
+        min(90vw, 370px);
+
     margin: 25px auto;
+
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 8px;
-    background: rgba(255,255,255,0.25);
-    border-radius: 18px;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+
+    padding: 9px;
+
+    background:
+        rgba(255,255,255,0.20);
+
+    border-radius: 22px;
+
+    box-shadow:
+        inset 0 0 15px rgba(0,0,0,0.12);
 }
 
+
+/* =========================
+   TILE
+========================= */
+
 .tile {
-    background: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1efff
+        );
+
     color: #5b4bb7;
+
     font-size: 38px;
+
     font-weight: bold;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    border-radius: 14px;
+
+    border-radius: 15px;
+
     cursor: pointer;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    transition: 0.15s;
+
+    box-shadow:
+        0 6px 12px rgba(0,0,0,0.22);
+
+    transition:
+        transform 0.12s,
+        box-shadow 0.12s;
+
+    touch-action: manipulation;
+
+    user-select: none;
 }
 
 .tile:hover {
-    transform: scale(1.05);
+
+    transform:
+        scale(1.045);
+
+    box-shadow:
+        0 9px 17px rgba(0,0,0,0.28);
 }
 
+.tile:active {
+
+    transform:
+        scale(0.94);
+}
+
+
+/* =========================
+   GAME BUTTONS
+========================= */
+
+.game-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   WIN SCREEN
+========================= */
+
 .win-card {
-    margin-top: 70px;
+    max-width: 500px;
 }
 
 .win-card h1 {
     font-size: 40px;
 }
 
+.congratulations {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .result {
-    background: rgba(255,255,255,0.15);
-    padding: 10px;
-    margin: 20px 0;
-    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    padding: 12px;
+
+    margin: 22px 0;
+
+    border-radius: 18px;
 }
 
 .result p {
-    margin: 12px;
+    margin: 13px;
 }
 
-@media (max-width: 500px) {
+.result b {
+    font-size: 19px;
+}
+
+.win-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   CELEBRATION
+========================= */
+
+#celebration {
+
+    position: fixed;
+
+    top: 42%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size: 42px;
+
+    z-index: 9999;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    animation:
+        celebrate 1.5s ease;
+}
+
+@keyframes celebrate {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(0.3);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1.25);
+    }
+
+    70% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(1.4);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
 
     body {
         padding: 10px;
     }
 
+    .screen {
+        align-items: flex-start;
+    }
+
     .card {
-        margin: 25px auto;
-        padding: 25px 12px;
+
+        margin:
+            55px auto 20px;
+
+        padding:
+            25px 12px;
+
+        border-radius: 23px;
     }
 
     h1 {
-        font-size: 30px;
+        font-size: 29px;
+    }
+
+    .win-card h1 {
+        font-size: 31px;
+    }
+
+    .emoji {
+        font-size: 55px;
     }
 
     .stats {
         gap: 5px;
     }
 
-    .stats div {
-        font-size: 12px;
+    .stat-box {
+        min-height: 82px;
     }
 
-    .stats span {
+    .stat-icon {
+        font-size: 18px;
+    }
+
+    .stat-box small {
+        font-size: 10px;
+    }
+
+    .stat-box b {
         font-size: 17px;
+    }
+
+    #puzzle {
+
+        width:
+            min(92vw, 350px);
+
+        height:
+            min(92vw, 350px);
+
+        gap: 7px;
+
+        padding: 7px;
     }
 
     .tile {
         font-size: 30px;
+        border-radius: 12px;
     }
 
-    .emoji {
-        font-size: 50px;
+    .sound-button {
+        top: 8px;
+        right: 8px;
+
+        font-size: 12px;
+
+        padding:
+            9px 12px;
+    }
+
+    .feature-box div {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+
+    .main-button {
+        font-size: 17px;
+        padding: 14px 24px;
+    }
+
+    #celebration {
+        font-size: 30px;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 360px) {
+
+    .card {
+        padding: 22px 9px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .tile {
+        font-size: 26px;
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .stat-box {
+        min-height: 70px;
     }
 }
