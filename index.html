@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Puzzle Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- START SCREEN -->
+    <div id="startScreen">
+        <div class="card">
+            <div class="emoji">🧩</div>
+            <h1>MY PUZZLE GAME</h1>
+            <p>🧠 Test Your Brain!</p>
+            <p>Arrange the numbers in order.</p>
+            <button onclick="startGame()">▶ START GAME</button>
+        </div>
+    </div>
+
+
+    <!-- GAME SCREEN -->
+    <div id="gameScreen" style="display:none;">
+
+        <div class="card">
+
+            <h1>🧩 Puzzle Game</h1>
+
+            <div class="stats">
+                <div>🏆 Level<br><span id="level">1</span></div>
+                <div>⏱️ Time<br><span id="timer">0</span>s</div>
+                <div>🎯 Moves<br><span id="moves">0</span></div>
+                <div>⭐ Score<br><span id="score">0</span></div>
+            </div>
+
+            <p>Arrange the numbers from 1 to 8!</p>
+
+            <div id="puzzle"></div>
+
+            <button onclick="shufflePuzzle()">🔄 RESTART</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- WIN SCREEN -->
+    <div id="winScreen" style="display:none;">
+
+        <div class="card win-card">
+
+            <div class="emoji">🏆</div>
+
+            <h1>🎉 YOU WON! 🎉</h1>
+
+            <p>Congratulations!</p>
+
+            <div class="result">
+                <p>🏆 Level: <b id="finalLevel">1</b></p>
+                <p>⏱️ Time: <b id="finalTime">0</b> seconds</p>
+                <p>🎯 Moves: <b id="finalMoves">0</b></p>
+                <p>⭐ Score: <b id="finalScore">0</b></p>
+            </div>
+
+            <button onclick="nextLevel()">➡️ NEXT LEVEL</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINAL SCREEN -->
+    <div id="finalScreen" style="display:none;">
+
+        <div class="card win-card">
+
+            <div class="emoji">👑</div>
+
+            <h1>🎉 GAME COMPLETE! 🎉</h1>
+
+            <p>You completed all 3 levels!</p>
+
+            <p>🏆 Final Score: <b id="totalScore">0</b></p>
+
+            <button onclick="startGame()">🔄 PLAY AGAIN</button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
