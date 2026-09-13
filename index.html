@@ -1,46 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Puzzle Game</title>
-    <meta name="google-site-verification" content="IsC-JzJSglWUKmX7nzJjs8pMJcfHYOC7GNMMbb7Yycw" />
+
+    <meta name="description"
+          content="My Puzzle Game - A fun and challenging number puzzle game.">
+    <meta name="theme-color" content="#667eea">
+
+    <meta name="google-site-verification"
+          content="IsC-JzJSglWUKmX7nzJjs8pMJcfHYOC7GNMMbb7Yycw">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<button id="soundButton" onclick="toggleSound()">🔊 Sound ON</button>
+
+    <!-- SOUND BUTTON -->
+    <button id="soundButton"
+            class="sound-button"
+            onclick="toggleSound()">
+        🔊 Sound ON
+    </button>
+
+
     <!-- START SCREEN -->
-    <div id="startScreen">
-        <div class="card">
+    <div id="startScreen" class="screen">
+
+        <div class="card start-card">
+
             <div class="emoji">🧩</div>
+
             <h1>MY PUZZLE GAME</h1>
-            <p>🧠 Test Your Brain!</p>
-            <p>Arrange the numbers in order.</p>
-            <button onclick="startGame()">▶ START GAME</button>
+
+            <p class="tagline">🧠 Test Your Brain!</p>
+
+            <p>
+                Arrange the numbers from
+                <b>1 to 8</b> in the correct order.
+            </p>
+
+            <div class="feature-box">
+                <div>🏆 Unlimited Levels</div>
+                <div>⏱️ Timer</div>
+                <div>🎯 Moves</div>
+                <div>⭐ Score</div>
+                <div>🔊 Sound Effects</div>
+                <div>💾 Best Score</div>
+            </div>
+
+            <button class="main-button"
+                    onclick="startGame()">
+                ▶ START GAME
+            </button>
+
         </div>
+
     </div>
 
 
     <!-- GAME SCREEN -->
-    <div id="gameScreen" style="display:none;">
+    <div id="gameScreen"
+         class="screen"
+         style="display:none;">
 
-        <div class="card">
+        <div class="card game-card">
 
             <h1>🧩 Puzzle Game</h1>
 
+            <!-- STATS -->
             <div class="stats">
-                <div>🏆 Level<br><span id="level">1</span></div>
-                <div>⏱️ Time<br><span id="timer">0</span>s</div>
-                <div>🎯 Moves<br><span id="moves">0</span></div>
-                <div>⭐ Score<br><span id="score">0</span></div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">🏆</span>
+                    <small>Level</small>
+                    <b id="level">1</b>
+                </div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">⏱️</span>
+                    <small>Time</small>
+                    <b>
+                        <span id="timer">0</span>s
+                    </b>
+                </div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">🎯</span>
+                    <small>Moves</small>
+                    <b id="moves">0</b>
+                </div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">⭐</span>
+                    <small>Score</small>
+                    <b id="score">0</b>
+                </div>
+
             </div>
 
-            <p>Arrange the numbers from 1 to 8!</p>
 
+            <!-- BEST SCORE -->
+            <div class="best-score">
+                🏅 Best Score:
+                <b id="bestScore">0</b>
+            </div>
+
+
+            <p class="instruction">
+                Arrange the numbers from
+                <b>1 to 8</b>!
+            </p>
+
+
+            <!-- PUZZLE -->
             <div id="puzzle"></div>
 
-            <button onclick="shufflePuzzle()">🔄 RESTART</button>
+
+            <!-- GAME BUTTONS -->
+            <div class="game-buttons">
+
+                <button onclick="restartGame()">
+                    🔄 RESTART
+                </button>
+
+                <button onclick="goHome()">
+                    🏠 HOME
+                </button>
+
+            </div>
 
         </div>
 
@@ -48,50 +138,69 @@
 
 
     <!-- WIN SCREEN -->
-    <div id="winScreen" style="display:none;">
+    <div id="winScreen"
+         class="screen"
+         style="display:none;">
 
         <div class="card win-card">
 
-            <div class="emoji">🏆</div>
+            <div class="emoji win-emoji">🏆</div>
 
             <h1>🎉 YOU WON! 🎉</h1>
 
-            <p>Congratulations!</p>
+            <p class="congratulations">
+                Congratulations!
+            </p>
 
             <div class="result">
-                <p>🏆 Level: <b id="finalLevel">1</b></p>
-                <p>⏱️ Time: <b id="finalTime">0</b> seconds</p>
-                <p>🎯 Moves: <b id="finalMoves">0</b></p>
-                <p>⭐ Score: <b id="finalScore">0</b></p>
+
+                <p>
+                    🏆 Level:
+                    <b id="finalLevel">1</b>
+                </p>
+
+                <p>
+                    ⏱️ Time:
+                    <b id="finalTime">0</b> seconds
+                </p>
+
+                <p>
+                    🎯 Moves:
+                    <b id="finalMoves">0</b>
+                </p>
+
+                <p>
+                    ⭐ Score:
+                    <b id="finalScore">0</b>
+                </p>
+
+                <p>
+                    🏅 Best Score:
+                    <b id="finalBestScore">0</b>
+                </p>
+
             </div>
 
-            <button onclick="nextLevel()">➡️ NEXT LEVEL</button>
+
+            <div class="win-buttons">
+
+                <button class="main-button"
+                        onclick="nextLevel()">
+                    ➡️ NEXT LEVEL
+                </button>
+
+                <button onclick="restartGame()">
+                    🔄 RESTART
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- FINAL SCREEN -->
-    <div id="finalScreen" style="display:none;">
-
-        <div class="card win-card">
-
-            <div class="emoji">👑</div>
-
-            <h1>🎉 GAME COMPLETE! 🎉</h1>
-
-            <p>You completed all 3 levels!</p>
-
-            <p>🏆 Final Score: <b id="totalScore">0</b></p>
-
-            <button onclick="startGame()">🔄 PLAY AGAIN</button>
-
-        </div>
-
-    </div>
-
-
+    <!-- SCRIPT -->
     <script src="script.js"></script>
 
 </body>
